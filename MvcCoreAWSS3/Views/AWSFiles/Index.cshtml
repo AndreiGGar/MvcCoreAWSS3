@@ -1,0 +1,28 @@
+﻿@model List<Tuple<string, List<string>>>
+
+<h1 style="color: blue;">
+    AWS Service Storage S3
+</h1>
+
+<a asp-action="UploadFile">Upload file</a>
+
+<ul class="list-group">
+    @foreach (var item in Model)
+    {
+        <li class="list-group-item">
+            @item.Item1
+            <img src="@ViewData["BUCKETURL"]@item.Item1" width="200" />
+
+            <ul>
+                @foreach (var version in item.Item2)
+                {
+                    <li>@version</li>
+                }
+            </ul>
+
+            <a asp-action="FileAWS" asp-route-fileName="@item">Ver fichero</a>
+            <a asp-action="Details" asp-route-fileName="@item">Detalles</a>
+            <a asp-action="DeleteFile" asp-route-fileName="@item">Delete</a>
+        </li>
+    }
+</ul>
